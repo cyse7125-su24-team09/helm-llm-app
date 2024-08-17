@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "rag-service.fullname" . }}-virtualservice
+  namespace: {{ .Release.Namespace }}
+spec:
+  hosts:
+    - "api.pritesh-nimje.me"
+  gateways:
+    - istio-ingress/istio-gateway
+  http:
+    - match:
+        - uri:
+            prefix: "/"
+      route:
+        - destination:
+            host: {{ include "rag-service.fullname" . }}-service.{{ .Release.Namespace }}.svc.cluster.local
+            port:
+              number: 80
