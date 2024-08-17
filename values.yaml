@@ -43,7 +43,12 @@ podDisruptionBudget:
   maxUnavailable: 1
 
 podAnnotations: {}
-podLabels: {}
+podLabels:
+  app: rag-service
+
+pdb:
+  create: true
+  maxUnavailable: 1
 
 podSecurityContext: {}
   # fsGroup: 2000
